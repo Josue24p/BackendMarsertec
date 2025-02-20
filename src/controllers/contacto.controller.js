@@ -1,6 +1,6 @@
 import { getConnection } from "../db/connection.js";
 
-// Obtener contactos
+// Obtener todos los contactos
 export const getContactos = (req, res) => {
     try {
         const pool = getConnection();
@@ -12,20 +12,17 @@ export const getContactos = (req, res) => {
             res.json(result);
         });
     } catch (error) {
-        console.error(error);
+        console.log(error);
         res.status(500).json({ error: "Error interno del servidor" });
     }
 };
 
 // Insertar un nuevo contacto
 export const createContacto = (req, res) => {
-    const { nombre_contacto, telefono_contacto, correo_contacto, mensaje_contacto } = req.body;
-    if (!nombre_contacto || !telefono_contacto || !correo_contacto || !mensaje_contacto) {
-        return res.status(400).json({ error: "Todos los campos son obligatorios" });
-    }
-
     try {
+        const { nombre_contacto, telefono_contacto, correo_contacto, mensaje_contacto } = req.body;
         const pool = getConnection();
+
         const sql = "INSERT INTO Contacto (nombre_contacto, telefono_contacto, correo_contacto, mensaje_contacto) VALUES (?, ?, ?, ?)";
         const values = [nombre_contacto, telefono_contacto, correo_contacto, mensaje_contacto];
 
@@ -37,7 +34,7 @@ export const createContacto = (req, res) => {
             res.json({ message: "Contacto agregado con éxito", id: result.insertId });
         });
     } catch (error) {
-        console.error(error);
+        console.log(error);
         res.status(500).json({ error: "Error interno del servidor" });
     }
 };
