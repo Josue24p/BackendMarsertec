@@ -1,9 +1,12 @@
 import { Router } from "express";
-import { getContactos } from "../controllers/contacto.controller";
+import { getContactos, createContacto } from "../controllers/contacto.controller.js";
 
 const router = Router();
 
-// Ruta para obtener los contactos
-router.get('/contacto', getContactos)
+// Ruta para obtener todos los contactos (GET /contacto)
+router.get("/", getContactos);
 
-export default router
+// Ruta para insertar un nuevo contacto (POST /contacto)
+router.post("/", createContacto);
+
+export default router;

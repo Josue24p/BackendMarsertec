@@ -5,6 +5,7 @@ const dbSettings = {
     user : config.db.user,
     database : config.db.database,
     host : config.db.server,
+    password: config.db.password,
 }
 
 export const getConnection = () => {

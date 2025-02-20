@@ -1,6 +1,9 @@
-import app from './app';
-import { getConnection } from './db/connection';
+import app from "./app.js";
+import { getConnection } from "./db/connection.js";
 
-getConnection()
-app.listen(4000);
-console.log('Server listening on port', 4000);
+getConnection(); // Conectar a la base de datos
+
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => {
+  console.log(`✅ Server listeningg on port ${PORT}`);
+});
